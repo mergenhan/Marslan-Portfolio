@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { siteConfig } from '../data/siteConfig';
 
 const skills = [
   'Product Strategy',
@@ -16,6 +17,8 @@ const skills = [
 ];
 
 export default function About() {
+  const { photo } = siteConfig.about;
+
   return (
     <section id="about" className="py-24 md:py-32 px-6 md:px-10 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
@@ -30,6 +33,19 @@ export default function About() {
           <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-black mb-8">
             Who I Am
           </h2>
+
+          {/* Optional about photo */}
+          {photo && (
+            <motion.img
+              src={photo}
+              alt="Murat Arslan"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="w-full aspect-[4/3] object-cover mb-8 grayscale"
+            />
+          )}
           <div className="space-y-4 text-gray-500 leading-relaxed">
             <p>
               Results-driven Product Manager with 7+ years of experience leading

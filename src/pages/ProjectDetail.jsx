@@ -1,12 +1,16 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { projects } from '../data/projects';
+import { siteConfig } from '../data/siteConfig';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export default function ProjectDetail() {
   const { slug } = useParams();
   const project = projects.find((p) => p.slug === slug);
+  const imageSrc = project
+    ? (siteConfig.projectImages[project.slug] ?? project.image ?? null)
+    : null;
 
   if (!project) {
     return (
@@ -73,9 +77,9 @@ export default function ProjectDetail() {
           className="w-full aspect-video mb-14 overflow-hidden"
           style={{ backgroundColor: project.color || '#e8e8e8' }}
         >
-          {project.image && (
+          {imageSrc && (
             <img
-              src={project.image}
+              src={imageSrc}
               alt={project.title}
               className="w-full h-full object-cover"
               onError={(e) => { e.currentTarget.style.display = 'none'; }}

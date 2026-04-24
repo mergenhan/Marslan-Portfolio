@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { siteConfig } from '../data/siteConfig';
 
 export default function ProjectCard({ project, index }) {
   const [hovered, setHovered] = useState(false);
+
+  // siteConfig overrides the image path from the projects data file
+  const imageSrc = siteConfig.projectImages[project.slug] ?? project.image ?? null;
 
   return (
     <motion.div
@@ -26,9 +30,9 @@ export default function ProjectCard({ project, index }) {
             transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="w-full h-full"
           >
-            {project.image ? (
+            {imageSrc ? (
               <img
-                src={project.image}
+                src={imageSrc}
                 alt={project.title}
                 className="w-full h-full object-cover"
                 onError={(e) => {

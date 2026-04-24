@@ -1,8 +1,27 @@
 import { motion } from 'framer-motion';
+import { siteConfig } from '../data/siteConfig';
 
 export default function Hero() {
+  const { avatar } = siteConfig.hero;
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-10 max-w-6xl mx-auto">
+      {/* Optional avatar */}
+      {avatar && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+          className="mb-8"
+        >
+          <img
+            src={avatar}
+            alt="Murat Arslan"
+            className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover grayscale"
+          />
+        </motion.div>
+      )}
+
       {/* Top label */}
       <motion.p
         initial={{ opacity: 0, y: 10 }}
